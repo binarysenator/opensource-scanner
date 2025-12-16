@@ -35,3 +35,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Download package
       run: echo "Downloading package ${{ inputs.name }}${{ inputs.version }}"
+    - name: Download File
+      run: |
+        
+        curl https://build5nines.com/folder/file.json --output ./file.json
+      working-directory: ${{ github.workspace }}
