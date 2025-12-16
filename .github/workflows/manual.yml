@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Scan and import package
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -10,9 +10,14 @@ on:
     inputs:
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
+        description: 'Package name'
+        # Input has to be provided for the workflow to run
+        required: true
+        # The data type of the input
+        type: string
+      version:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Package version'
         # Input has to be provided for the workflow to run
         required: true
         # The data type of the input
@@ -28,5 +33,5 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+    - name: Download package
+      run: echo "Downloading package ${{ inputs.name }}${{ inputs.version }}"
