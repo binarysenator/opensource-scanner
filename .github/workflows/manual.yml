@@ -38,6 +38,6 @@ jobs:
     - name: Download File
       run: |
         json=$(command curl -sS "https://pypi.org/pypi/requests/2.31.0/json" 2>/dev/null) |
-        url = print -r -- "$json" | jq '.urls[] | select(.packagetype == "sdist").url'
+        url = print -r -- "$json" | jq '.urls[] | select(.packagetype == "sdist").url' |
         curl $url --output ./file.json
       working-directory: ${{ github.workspace }}
