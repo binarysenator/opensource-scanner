@@ -37,7 +37,11 @@ jobs:
       run: echo "Downloading package ${{ inputs.name }}${{ inputs.version }}"
     - name: Download File
       run: |
-        json=$(command curl -sS "https://pypi.org/pypi/requests/2.31.0/json" 2>/dev/null) |
-        url = print -r -- "$json" | jq '.urls[] | select(.packagetype == "sdist").url' |
-        curl $url --output ./file.json
+        set -euo pipefail
+
+        url=$(curl -sS "https://pypi.org/pypi/requests/2.31.0/json" \
+          | jq -r '.urls[] | select(.packagetype == "sdist") | .url')
+
+        echo "Downloading: $url"
+        curl -L "$url" --output ./file.tar.gz
       working-directory: ${{ github.workspace }}
