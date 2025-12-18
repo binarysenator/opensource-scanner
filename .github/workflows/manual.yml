@@ -52,6 +52,7 @@ jobs:
       with:
           input: ${{ github.workspace }}/file.tar.gz
           format: "table"
+          scan-type: "fs"
           exit-code: 1
           ignore-unfixed: true
           severity: "CRITICAL,HIGH"
